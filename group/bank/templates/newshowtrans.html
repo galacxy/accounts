@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>All Transactions</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+    function callforconfirm()
+    {
+        if(!confirm("Proceeding to Logout..."))
+         return false;
+
+    }
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+
+      <div class="menu_nav">
+        <ul>
+          <li><a href="/user/home/">Home</a></li>
+          <li class="active"><a href="/users/alltrans">All Events</a></li>
+          <li><a href="/user/addtrans">Add Event</a></li>
+          {% if trans.adder == user %}
+                    <li><a href="{% url 'bank.views.edittrans' trans.matterID trans.id %}">Edit Bank Payments</a></li>
+           {% endif %}
+        </ul>
+      {% if trans.adder == user %}
+          <h3 style="padding-left: 103px" class="user">Hey, {{ user }}&nbsp;!</h3>
+        {% else %}
+          <h3 class="user">Hey, {{ user }}&nbsp;!</h3>
+      {% endif %}
+      </div>
+        <hr>
+    </div>
+
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Details for</span> {{ trans.matterID }}&nbsp;<span>dated</span>&nbsp;{{ trans.matterdate }}</h2>
+          <div class="clr"></div>
+          <p><span class="date">As on</span> {{ today }}</p>
+          <table id="gradient-style" width="100%">
+            <thead>
+    	        <tr>
+                    <th>User</th>
+                    <th class="tooltip">*Amount spent<span class="help">*All values in<img alt="INR" src="/static/userhome/img/rupee.png" align="top" height="20" width="20"></span></th>
+                    <th class="tooltip">*Amount Paid on Spot<span class="help">*All values in<img alt="INR" src="/static/userhome/img/rupee.png" align="top" height="20" width="20"></span></th>
+
+                </tr>
+            </thead>
+    <tbody>
+            {% for en in entry %}
+        <tr>
+            <td>{{ en.UID }}</td>
+            <td>{{ en.amt_spent}}</td>
+            <td>{{ en.amt_paid }}</td>
+
+         </tr>
+        {% endfor %}
+    </tbody>
+</table>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/users/alltrans/">Back</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/user/inbox">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout" onclick="return callforconfirm();">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

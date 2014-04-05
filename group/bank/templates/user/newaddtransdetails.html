@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Add Event Details</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+    function callforconfirm()
+    {
+        if(!confirm("Proceeding to Logout..."))
+         return false;
+
+    }
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack{{ data.date }}</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+        <div class="article" style="padding-left: 38px">
+        {% if state != ''%}
+        <h3>{{ state }}.&nbsp;</h3>
+        <h3> <span>Click here to<a href="/users"> login </a>again </span></h3>
+
+     </div>
+            {% else %}
+      <div class="menu_nav">
+        <ul>
+          <li><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Events</a></li>
+          <li class="active"><a href="/user/addtrans">Add Event</a></li>
+        </ul>
+       <h3 class="user">Hey, {{ data.adder }}&nbsp;!</h3>
+      </div>
+        <hr>
+    </div>
+
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2>Add Transaction Specifications</h2>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date : </span>{{ today }}</p>
+            <p><span>Added By : </span>{{ data.adder }}</p>
+            <p><span>Add for </span>{{ data.occasionid }}<span> on </span>{{ data.date }}</p>
+            <p class="error">&nbsp{{ error }}</p>
+            {% if 'total_expense' in data and 'total_paid' in data %}
+                <p><span> Total Expense: </span>&nbsp;Rs.&nbsp;{{ data.total_expense }}</p>
+                <p><span> Total Paid: </span>&nbsp;Rs.&nbsp;{{ data.total_paid }}</p>
+            {% endif %}
+           <form method="post" action="." class="login">{% csrf_token %}
+          <table id="gradient-style">
+            <thead>
+                <tr>
+                    <th>Members</th>
+                    <th class="tooltip">Expenditure<span class="help">*All values in<img alt="INR" src="/static/userhome/img/rupee.png" align="top" height="20" width="20"></span></th>
+                    <th class="tooltip">Paid at Bill<span class="help">*All values in<img alt="INR" src="/static/userhome/img/rupee.png" align="top" height="20" width="20"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%   for user,ex,pd in data.values  %}
+                <tr>
+                    <th style="text-align: left">{{ user }}</th>
+                    <td><input style="text-align: center" type="number" id="expense" name="expense"  maxlength="6" value="{{ ex }}"></td>
+                    <td><input style="text-align: center" type="number" id="paid" name="paid" maxlength="6" value="{{ pd }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+            </table>
+<p>
+            <button class="gobutton" id="submitbutton" type="submit" name="submit">Save</button>
+</p>
+           </form>
+
+
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star">Navigation</h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/home/">Home</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/user/inbox">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout" onclick="return callforconfirm();">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    {% endif %}
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Add a Transaction</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript">
+ var RecaptchaOptions = {
+    theme : 'clean'
+ };
+ </script>
+<link rel="stylesheet" href="/static/addtrans/jquery-ui.css" />
+<script type="text/javascript" src="/static/addtrans/datepick/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/static/addtrans/script.js"></script>
+<script type="text/javascript" src="/static/addtrans/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+    function callforconfirm()
+    {
+        if(!confirm("Proceeding to Logout..."))
+         return false;
+
+    }
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="menu_nav">
+        <ul>
+          <li><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Events</a></li>
+          <li class="active"><a href="/user/addtrans">Add Event</a></li>
+        </ul>
+       <h3 class="user">Hey, {{ data.adder }}&nbsp;!</h3>
+      </div>
+        <hr>
+    </div>
+
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Add an Event</span></h2>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date :</span> {{ today }}</p>
+            <p class="error">&nbsp{{ error }}</p>
+        <fieldset style="width: 100%; height: 100%">
+            <legend>Transaction Outline</legend>
+
+           <form method="post" action="." class="login">{% csrf_token %}
+          <table style="width: 100%">
+            <thead>
+            <tr>
+                    <th style="text-align: left">Date                      :</th>
+                    <td style="text-align: left"><input type="text" name="datepicker" id="datepicker" value = "{{ data.date }}" ><small style="color: #aaaaaa">&nbsp(mm/dd/yyyy)</small></td>
+                </tr>
+    	        <tr>
+                    <th style="text-align: left">Occasion :</th>
+                    <td style="text-align: left"><input type="text" name="occid" id="occid" maxlength="10" value = "{{ data.occasionid }}"/><small style="color: #aaaaaa">&nbsp;(should not be pre-existing)</small></td>
+                </tr>
+                <tr>
+                    <th style="text-align: left; vertical-align: top">Short Description for Occasion                 :</th>
+                    <td style="text-align: left"><input name="occ" id="occ" value = "{{ data.occasion }}" maxlength="50"/><small style="color: #aaaaaa; vertical-align: top;">&nbsp;(Atleast 10 chars)</small></td>
+                </tr>
+                <tr>
+                    <th style="text-align: left" colspan="2">Select members from below :</th>
+                </tr>
+            </thead>
+    <tbody>
+            {% for user in users %}
+            <tr >
+                <td colspan="2"><input type="checkbox" name="member" id = "member" value="{{ user.nick }}"> {{ user.name }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                    <td colspan="2">
+                        <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Le-v-4SAAAAAIuKm6Eu8cAMWb0inkJQCQvNux9M">
+                        </script>
+                        <noscript>
+                        <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Le-v-4SAAAAAIuKm6Eu8cAMWb0inkJQCQvNux9M" height="300" width="500" frameborder="0"></iframe><br>
+                            <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+                            </textarea>
+                            <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+                         </noscript>
+                    </td>
+             </tr>
+    </tbody>
+
+</table>
+<p>
+            <button class="gobutton" id="submitbutton" type="submit" name="submit" class="login-button">Proceed</button>
+</p>
+           </form>
+
+</fieldset>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/home/">Home</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a href="/user/inbox">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout" onclick="return callforconfirm();">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

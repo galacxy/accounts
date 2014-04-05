@@ -1,0 +1,7 @@
+from django.shortcuts import render_to_response
+from bank.models import users
+ 
+def home(request):
+	 entries = users.objects.all()[:5]
+	 return render_to_response('index.html',{ 'users':entries})
+# Create your views here.

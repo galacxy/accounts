@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>My Profile</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+    function callforconfirm()
+    {
+        if(!confirm("Proceeding to Logout..."))
+         return false;
+
+    }
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+        <div class="menu_nav">
+        <ul>
+          <li class="active" ><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Events</a></li>
+          <li><a href="/user/addtrans">Add Event</a></li>
+        </ul>
+            <h3 class="user">Hey, {{ nick }}&nbsp;!</h3>
+      </div>
+        <hr>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Profile Edit</span></h2>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date:&nbsp;</span>{{ today }}</p>
+
+                <p class="error">{{ error }}&nbsp;</p>
+
+            <fieldset style="height: 200px;width: 392px">
+                <legend>Edit Details</legend>
+                <form method="post" action=".">{% csrf_token %}
+          <table>
+
+            <thead>
+    	        <tr>
+        	        <th style="text-align: left">Name</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="text" name="name" id="name" value="{{ name }}" maxlength="50" autocomplete="off" ></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Email</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="email" name="email" id="email" value="{{ email }}" autocomplete="off"></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Contact</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="number" name="contact" id="contact" value="{{ contact }}" autocomplete="off"></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Password</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="password" name="password" id="password" autocomplete="off"><small style="color: #aaaaaa">&nbsp(Prove your Identity)</small></td>
+                </tr>
+            <tr>
+                <td align="right" colspan="2">&nbsp;</td>
+            </tr>
+           <tr>
+               <td><button class="gobutton" id="submitbutton" type="submit">Save</button></td>
+           </tr>
+            </thead>
+
+
+</table></form>
+                    </fieldset>
+        </div>
+      </div>
+       <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/profile">Back</a></li>
+              <li><a class="activeref">Edit Profile</a></li>
+              <li><a  href="{% url 'bank.views.changepassword' nick %}">Change Password</a></li>
+            <li><a href="/user/inbox">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout" onclick="return callforconfirm();">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

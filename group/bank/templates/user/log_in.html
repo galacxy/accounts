@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>My Account</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+    function showStuff(id) {
+        if(document.getElementById(id).value=='')
+        document.getElementById(id).style.visibility = 'hidden';
+    else
+    document.getElementById(id).style.visibility = 'visible';
+
+}
+    window.onload = function()
+                {
+                   showStuff('msg');
+                };
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+        <hr>
+        <h3 id="msg" class="message">{{ message }}</h3>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Login Here</span></h2>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date:&nbsp;</span>{{ today }}</p>
+
+                <p class="error">{{ error }}&nbsp;</p>
+
+            <fieldset style="width: 305px">
+                  <legend>Login Details</legend>
+                <form method="post" action="." class="login">{% csrf_token %}
+          <table>
+
+            <thead>
+    	        <tr>
+        	        <th scope="col">Username</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="text" name="username" id="username" value="{{ username }}" autocomplete="off" ></td>
+                </tr>
+                <tr>
+        	        <th scope="col">Password</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="password" name="password" id="password"></td>
+                </tr>
+            <tr>
+                <td align="right" colspan="2">&nbsp;</td>
+            </tr>
+           <tr>
+               <td><button class="gobutton" id="submitbutton" type="submit" class="login-button">Login</button></td>
+           </tr>
+            </thead>
+
+
+</table></form>
+                    </fieldset>
+        </div>
+      </div>
+
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

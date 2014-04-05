@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h1><a href="/user/home/">HOME</a> </h1>
+{% if trans.adder == user %}
+<h2><a href="{% url 'bank.views.edittrans' trans.matterID %}">Edit Bank Payment</a> </h2>
+{% endif %}
+<h1>Showing details for {{ trans.matterID }}</h1>
+<h2>Date: {{ trans.matterdate }}</h2>
+<h2>Occasion: <p>{{ trans.matter }}</p></h2>
+<h2>Added by: {{ trans.adder }}</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <td>User</td>
+            <td>Amount spent</td>
+            <td>Amount Paid on Spot</td>
+            <td>Amount paid to bank</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for en in entry %}
+        <tr>
+            <td>{{ en.UID }}</td>
+            <td>{{ en.amt_spent}}</td>
+            <td>{{ en.amt_paid }}</td>
+            <td>{{ en.paid_to_bank }}</td>
+         </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>My Account</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+    function showStuff(id) {
+        if(document.getElementById(id).value=='')
+        document.getElementById(id).style.visibility = 'hidden';
+    else
+    document.getElementById(id).style.visibility = 'visible';
+
+}
+    window.onload = function()
+                {
+                   showStuff('msg');
+                };
+
+    function callforconfirm()
+    {
+        if(!confirm("Proceeding to Logout..."))
+         return false;
+
+    }
+
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+      <div class="menu_nav">
+        <ul>
+          <li class="active" ><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Events</a></li>
+          <li><a href="/user/addtrans">Add Event</a></li>
+        </ul>
+           <h3 class="user">Hey, {{ person.nick }}&nbsp;!</h3>
+      </div>
+        <hr>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>My Profile</span></h2>
+          <div class="clr"></div>
+          <p><span class="date">As on </span> &nbsp;{{ today }}</p>
+            <h3>
+                <span>Last Login<span style="padding-left: 20px;padding-right: 20px;">:</span></span>{{ person.lastlogin }}
+            </h3>
+        <h3><span>Name<span style="padding-left: 53px;padding-right: 20px;">:</span></span>{{ person.name }}</h3>
+        <h3><span>Nick<span style="padding-left: 62px;padding-right: 20px;">:</span></span>{{ person.nick }}</h3>
+        <h3><span>Balance<span style="padding-left: 36px;padding-right: 20px;">:</span></span>Rs.&nbsp;{{ person.balance }}/-</h3>
+        <h3><span>Email<span style="padding-left: 53px;padding-right: 20px;">:</span></span>{{ person.email }}</h3>
+        <h3><span>Contact<span style="padding-left: 37px;padding-right: 20px;">:</span></span>{% if person.contact == None %}&nbsp;{% else %}{{ person.contact }}{% endif %}</h3>
+        <h3><span>Message<span style="padding-left: 30px;padding-right: 20px;">:</span></span>{{ person.message }}</h3>
+        </div>
+      </div>
+
+
+
+
+      <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/home">Back</a></li>
+            <li><a class="activeref">Profile</a></li>
+            <li><a href="{% url 'bank.views.editprofile' person.nick %}">Edit Profile</a> </li>
+            <li><a href="/user/inbox">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout" onclick="return callforconfirm();">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

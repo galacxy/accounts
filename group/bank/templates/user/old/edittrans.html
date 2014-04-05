@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h1><a href="/user/home/">HOME</a> </h1>
+{% if state %}
+    {{ state }}
+{% else %}
+hello @
+{{ paid }}
+    <p>members: {{ data.members }}</p>
+    <p>Welcome to {{ data.occasion }} at {{ data.date }}</p>
+    <p>{{ error }}</p>
+        {% if 'total_expense' in data and 'total_paid' in data %}
+        <p>Total Expense: {{ data.total_expense }}</p>
+        <p>Total Paid: {{ data.total_paid }}</p>
+     {% endif %}
+    <br><br>
+    <form method="post" action="."  class="login">{% csrf_token %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>Members</td>
+                    <td>Expenditure</td>
+                    <td>Paid at Bill</td>
+                    <td>Paid to Bank</td>
+                </tr>
+            </thead>
+            <tbody>
+            {%   for user, pd in data  %}
+                <tr>
+                    <td>{{ user.UID }}</td>
+                    <td><input type="number" id="paid" name="paid" maxlength="6" value="{{ user.amt_spent }}" readonly ></td>
+                    <td><input type="number" id="paid" name="paid" maxlength="6" value="{{ user.paid_at_bill }}" readonly></td>
+                    <td><input type="number" id="bk_pyt" name="bk_pyt" maxlength="6" value="{{ pd }}"></td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td colspan="3"><input type="submit" name="submit" value="save"></td>
+                </tr>
+            </tbody>
+        </table>
+        {% comment %}<button type="submit" class="login-button">Proceed</button>{% endcomment %}
+    </form>
+{% endif%}
+</body>
+</html>

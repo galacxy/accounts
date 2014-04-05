@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Compose Message</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>vishwas to karna padega</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+        <div class="menu_nav">
+        <ul>
+          <li class="active" ><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Events</a></li>
+          <li><a href="/user/addtrans">Add Event</a></li>
+        </ul>
+            <h3 class="user">Hey, {{ user }}&nbsp;!</h3>
+      </div>
+        <hr>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+            <h3 style="float: left;"><button class="gobutton"><a href="/user/inbox">Inbox{% if msg_count != 0 %}({{ msg_count }}){% endif %}</a></button></h3>
+          <h3 style="float: left;"><button class="gobutton"><a href="/user/outbox">OutBox</a></button></h3>
+          <h3 style="float: left;"><button class="gobutton"><a href="/user/compose">Compose</a></button></h3>
+          <h2><span>{{ message.msgsub }}</span></h2>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date:&nbsp;</span>{{ today }}</p>
+            <table>
+            <thead>
+    	        <tr>
+        	        <th style="text-align: left">Sender</th>
+                    <td scope="col">&nbsp;&nbsp;{{ message.sender }}</td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Time</th>
+                    <td scope="col" style="padding-left: 2px">&nbsp;&nbsp;{{ message.moment }}</td>
+                </tr>
+                <tr>
+        	        <th style="text-align:left">Message</th>
+                    <td scope="col" style="padding-left: 5px">&nbsp;<span>{{ message.msgbody }}</span></td>
+                </tr>
+            <tr>
+                <td align="right" colspan="2">&nbsp;</td>
+            </tr>
+           <tr>
+               <td><button class="gobutton" id="submitbutton" type="button"><a href="/user/compose">Reply</a></button></td>
+           </tr>
+            </thead>
+
+
+</table></form>
+                    </fieldset>
+        </div>
+      </div>
+       <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/profile">Back</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a class="activeref" href="/user/inbox">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

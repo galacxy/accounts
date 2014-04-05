@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Top 10 Express Table Designs - Smashing Magazine Source</title>
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+</head>
+<body>
+<h2>{{ message }}</h2>
+<h1>Hi,{{ user }}</h1>
+<h1 class="trans">My Transactions</h1>
+<h1>
+    <a class="trans" href="/users/alltrans">All Transactions</a>&nbsp;
+    <a class="trans" href="/user/addtrans">Add Transaction</a>&nbsp;
+    <a href="/user/logout">Logout</a>&nbsp;
+    <a href="/users/testalltrans">Test ALL TRans</a>
+</h1>
+<table id="gradient-style" summary="Meeting Results">
+    <thead>
+    	<tr>
+        	<th scope="col">Occasion</th>
+            <th scope="col">Date</th>
+            <th scope="col">Expenses*</th>
+            <th scope="col">Paid at Location*</th>
+            <th scope="col">Paid at Bank*</th>
+            <th scope="col">Added By</th>
+        </tr>
+        <tr>
+        	<td colspan="6">Click on the Occasion to view details</td>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <td align="left" colspan="6">*All values are in<img alt="rupee" src="/static/userhome/img/rupee.png" align="top" height="20" width="20"></td>
+        </tr>
+    </tfoot>
+    <tbody>
+            {% for entry,trans in rows %}
+
+                        <tr>
+                            <td><a href="{% url 'bank.views.showtrans' trans.matterID %}" >{{ trans.matterID }}</a></td>
+                            <td>{{ trans.matterdate }}</td>
+                            <td>{{ entry.amt_spent }}</td>
+                            <td>{{ entry.amt_paid }}</td>
+                            <td>{{ entry.paid_to_bank }}</td>
+                            <td>{{ trans.adder }}</td>
+                        </tr>
+
+            {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

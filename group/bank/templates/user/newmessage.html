@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MailBix-Compose</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+    function check()
+    {
+        var flag = true;
+        if(document.getElementById('recp').value=='--')
+        {
+           alert('Select the recepient');
+           flag = false;
+        }
+        else if(document.getElementById('recp').value=='all')
+        {
+            if(!confirm('Message will be sent to all'))
+              flag = false;
+        }
+        else if(document.getElementById('msgbody').value=='')
+        {
+            alert('Cannot send empty message')
+                flag = false;
+        }
+        else if(document.getElementById('msgsub').value=='')
+        {
+            if(!confirm('Send message without subject'))
+                flag = false;
+        }
+        return flag;
+    }
+
+    function callforconfirm()
+    {
+        if(!confirm("Proceeding to Logout..."))
+         return false;
+
+    }
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+        <div class="menu_nav">
+        <ul>
+          <li class="active" ><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Events</a></li>
+          <li><a href="/user/addtrans">Add Event</a></li>
+        </ul>
+            <h3 class="user">Hey, {{ user }}&nbsp;!</h3>
+      </div>
+        <hr>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h3 style="float: left;"><button class="gobutton" ><a href="/user/inbox">Inbox{% if msg_count != 0 %}({{ msg_count }}){% endif %}</a></button></h3>
+          <h3 style="float: left;"><button class="gobutton" ><a href="/user/outbox">OutBox</a></button></h3>
+          <h3 style="float: left;"><button class="gobutton" id="inactivebutton">Compose</button></h3>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date:&nbsp;</span>{{ today }}</p>
+            <fieldset style="height: 230px;width: 350px">
+                <legend>Compose Message</legend>
+                <form method="post" action=".">{% csrf_token %}
+          <table>
+
+            <thead>
+    	        <tr>
+        	        <th style="text-align: left">Recepient</th>
+                    <td scope="col">&nbsp;&nbsp;<select type="text" name="recp" id="recp">
+                        <option value="--">--Select--</option>
+                        <!--<option value="all">All</option>-->
+                        {% for recp in recepients %}
+                            {% if recp != user %}
+                                <option value="{{ recp }}">{{ recp }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Subject</th>
+                    <td scope="col" style="padding-left: 2px">&nbsp;&nbsp;<input type="text" name="msgsub" id="msgsub"  autocomplete="off" maxlength="30"></td>
+                </tr>
+                <tr>
+        	        <th style="text-align:left">Message</th>
+                    <td scope="col" style="padding-left: 5px">&nbsp;&nbsp;<textarea  name="msgbody" id="msgbody" autocomplete="off" rows="4" cols="50"></textarea></td>
+                </tr>
+            <tr>
+                <td align="right" colspan="2">&nbsp;<small>Have a good day!</small></td>
+            </tr>
+           <tr>
+               <td><button class="gobutton" id="submitbutton" type="submit" onclick="return check();">Send</button></td>
+           </tr>
+            </thead>
+
+
+</table></form>
+                    </fieldset>
+        </div>
+      </div>
+       <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/profile">Back</a></li>
+              <li><a href="/user/profile">Profile</a></li>
+              <li><a class="activeref">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout" onclick="return callforconfirm();">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

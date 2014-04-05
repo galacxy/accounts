@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> THE BANK OF WOLVES </title>
+</head>
+<body>
+	<h1>ACCOUNTS</h1>
+	<div>
+	<table border=1>
+		<tr>
+			<td>Last Login &nbsp</td> 
+			<td>ID</td>
+			<td>Name</td>
+			<td>Dues</td>
+			<td>Balance</td>
+			<td>Transactions</td>
+		</tr>
+		{% for user in entries %}
+			<tr>
+			<td>00</td> 
+			<td>11</td>
+			<td>{{user.name}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.balance}}</td>
+			<td></td>
+		</tr>
+		{%endfor%}
+	</table>
+	</div>
+</body>
+</html>

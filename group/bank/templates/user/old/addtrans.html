@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add a transaction</title>
+
+    <link rel="stylesheet" href="/static/addtrans/jquery-ui.css" />
+    <link rel="stylesheet" media="all" type="text/css" href="/static/addtrans/timepick/jquery-ui-timepicker-addon.css" />
+    <script type="text/javascript" src="/static/addtrans/datepick/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="/static/addtrans/script.js"></script>
+    <script type="text/javascript" src="/static/addtrans/timepick/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="/static/addtrans/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/addtrans/timepick/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript" src="/static/addtrans/timepick/jquery-ui-sliderAccess.js"></script>
+</head>
+<body>
+<h1><a href="/user/home/">HOME</a> </h1>
+{% if error != ''%}
+<a href="/users/"><p>{{ error }}</p></a>
+{% else %}
+<h1>Hi, {{ data.adder }}&nbsp;{{ data }} <br>{{ state }}</h1>
+    <form method="post" action="." class="login">{% csrf_token %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>Choose a key for Occasion </td>
+                    <td><input type="text" name="occid" id="occid" maxlength="15" value = "{{ data.occasionid }}"  onChange="document.getElementById('occid').value=trim(this.value);"/></td>
+                </tr>
+                <tr>
+                    <td>Occasion</td>
+                    <td><input type="text" name="occ" id="occ" value = "{{ data.occasion }}" maxlength="50" onChange="document.getElementById('occ').value=trim(this.value);"></td>
+                </tr>
+                <tr>
+                    <td>Date</td><td>
+                    <input type="text" name="datepicker" id="datepicker" value = "{{ data.date }}" onChange="document.getElementById('datepicker').value=trim(this.value);"></td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+            <tr >
+                <td colspan="2"><input type="checkbox" name="member" id = "member" value="{{ user.nick }}"> {{ user.first_name }}&nbsp;{{ user.last_name }}<br></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p class="login-submit">
+            <button type="submit" name="submit" class="login-button">Proceed</button>
+        </p>
+    </form>
+{% endif %}
+</body>
+</html>

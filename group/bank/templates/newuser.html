@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Sign Up</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+<script type="text/javascript">
+ var RecaptchaOptions = {
+    theme : 'clean'
+ };
+ </script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>New User</span></h2>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date:&nbsp;</span>{{ today }}</p>
+
+                <p class="error">{{ error }}&nbsp;</p>
+
+            <fieldset>
+                  <legend>Sign Up</legend>
+                <form method="post" action="." class="login">{% csrf_token %}
+          <table>
+
+            <thead>
+    	        <tr>
+        	        <th style="text-align: left">Username</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="text" name="nick" id="nick" value="{{ nick }}" autocomplete="off" ></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Your Name</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="text" name="name" id="name" value="{{ name }}">&nbsp;<small style="color: #aaaaaa">&nbsp;*Required</small></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Password</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="password" name="password" id="password">&nbsp;<small style="color: #aaaaaa">&nbsp;*Atleast 8 characters</small></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Confirm Password</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="password" name="password2" id="password"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6Le-v-4SAAAAAIuKm6Eu8cAMWb0inkJQCQvNux9M">
+                        </script>
+                        <noscript>
+                        <iframe src="http://www.google.com/recaptcha/api/noscript?k=6Le-v-4SAAAAAIuKm6Eu8cAMWb0inkJQCQvNux9M" height="300" width="500" frameborder="0"></iframe><br>
+                            <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+                            </textarea>
+                            <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+                         </noscript>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="gobutton" id="submitbutton" type="submit" class="login-button">Go</button></td>
+                    <td><a href="/users">Already Registered?</a> </td>
+                </tr>
+            </thead>
+
+
+</table></form>
+                    </fieldset>
+        </div>
+      </div>
+
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

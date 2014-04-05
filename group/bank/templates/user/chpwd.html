@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>user Change Password</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>slogan</small></a></h1>
+      </div>
+      <div class="clr"></div>
+      <div class="clr"></div>
+        <div class="menu_nav">
+        <ul>
+          <li class="active" ><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Transactions</a></li>
+          <li><a href="/user/addtrans">Add Transaction</a></li>
+        </ul>
+      </div>
+        <hr>
+      <div class="clr"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+          <h2><span>Change your Password Here</span></h2>
+          <div class="clr"></div>
+          <p><span class="date">Today's Date:&nbsp;</span>{{ today }}</p>
+
+                <p class="error">{{ error }}&nbsp;</p>
+
+            <fieldset style="height: 170px;width: 350px">
+                <legend>Authentication</legend>
+                <form method="post" action="." class="login">{% csrf_token %}
+          <table>
+
+            <thead>
+    	        <tr>
+        	        <th style="text-align: left">Old Password</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="password" name="oldpassword" id="oldpassword" value="{{ oldp }}" autocomplete="off" ></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">New Password</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="password" name="password" id="password" autocomplete="off"></td>
+                </tr>
+                <tr>
+        	        <th style="text-align: left">Confirm New Password</th>
+                    <td scope="col">&nbsp;&nbsp;<input type="password" name="password2" id="password2" autocomplete="off"></td>
+                </tr>
+            <tr>
+                <td align="right" colspan="2">&nbsp;</td>
+            </tr>
+           <tr>
+               <td><button id="gobutton" type="submit" class="login-button">Save</button></td>
+           </tr>
+            </thead>
+
+
+</table></form>
+                    </fieldset>
+        </div>
+      </div>
+       <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/home/">Home</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+              <li><a class="activeref" href="#">Change Password</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="/user/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

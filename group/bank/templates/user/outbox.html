@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MailBox-Out</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<style type="text/css">
+<!--
+@import url("/static/userhome/css/style.css");
+-->
+</style>
+<script type="text/javascript" src="/static/userhome/js/cufon-yui.js"></script>
+<script type="text/javascript" src="/static/userhome/js/arial.js"></script>
+<script type="text/javascript" src="/static/userhome/js/cuf_run.js"></script>
+ <script type="text/javascript">
+    function callforconfirm()
+    {
+        if(!confirm("Proceeding to Logout..."))
+         return false;
+
+    }
+</script>
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="#">Bank of<span> Wolf Pack</span><small>transparent solutions</small></a></h1>
+      </div>
+      <div class="clr"></div>
+        <div class="article" style="padding-left: 38px">
+     </div>
+
+      <div class="menu_nav">
+        <ul>
+          <li class="active"><a href="/user/home/">Home</a></li>
+          <li><a href="/users/alltrans">All Events</a></li>
+          <li><a href="/user/addtrans">Add Event</a></li>
+        </ul>
+       <h3 class="user">Hey, {{ user }}!</h3>
+      </div>
+        <hr>
+    </div>
+
+  </div>
+  <div class="content">
+    <div class="content_resize">
+      <div class="mainbar">
+        <div class="article">
+        <div class="clr"></div>
+          <h3 style="float: left;"><button class="gobutton" ><a href="/user/inbox">Inbox{% if msg_count != 0 %}({{ msg_count }}){% endif %}</a></button></h3>
+          <h3 style="float: left;"><button class="gobutton" id="inactivebutton">OutBox</button></h3>
+          <h3 style="float: left;"><button class="gobutton" ><a href="/user/compose">Compose</a></button></h3>
+            <h3 style="padding-left: 230px"><span style="color: darkgreen;background-color: yellow">{{ message }}</span></h3>
+          <div class="clr"></div>
+            <p><span class="date">As on</span> {{ today }}</p>
+        {% if not messages %}
+            <h3> <span>No messages found!</span></h3>
+            {% else %}
+          <table id="gradient-style" style="width: 110%" summary="Meeting Results">
+            <thead>
+    	        <tr>
+        	        <th scope="col">Select</th>
+                    <th scope="col">To</th>
+                    <th scope="col" style="width: 270px">Message</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+    <tbody>
+            {% for msgs in messages %}
+
+                        <tr>
+                            <td><input type="checkbox" id="select" name="select"></td>
+                            <td>{% if msgs.recepient == user %}Self{% else %}{{ msgs.recepient }}{% endif %}</td>
+                            <td style="width: 270px"><a href="{%  url 'bank.views.view_msg' msgs.id %}">{{ msgs.msgsub}}</a></td>
+                            <td>{{ msgs.moment }}</td>
+                        </tr>
+
+            {% endfor %}
+    </tbody>
+</table>
+
+        {% endif %}
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="gadget">
+          <h2 class="star"><span>Navigation</span></h2>
+          <div class="clr"></div>
+          <ul class="sb_menu">
+            <li><a href="/user/home/">Home</a></li>
+            <li><a href="/user/profile">Profile</a></li>
+            <li><a class="activeref">MailBox</a>&nbsp;{% if msg_count != 0 %}<span class="msgcount">{{ msg_count }}</span>{% endif %}</li>
+            <li><a href="/user/logout" onclick="return callforconfirm();">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="clr"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

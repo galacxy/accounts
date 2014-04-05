@@ -1,0 +1,12 @@
+from bank.models import *
+
+trans = transaction.objects.all().order_by('matterdate')
+tid = total = []
+for tr in trans:
+    tid.append(tr.id)
+for t in tid:
+    val = entries.objects.values_list('amt_spent', flat=True).filter(TID_id=t)
+    amt = 0
+    for v in val:
+	amt += float(v)
+    total.append(amt)
