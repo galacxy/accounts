@@ -2,8 +2,8 @@ This project is based on Django Framework.
 
 About
 
-We (me and my friends) often go for outings and involved money matters. It so happened that many a times the answer to 
-'who paid how much money' was lost after a day. So I decided to make a web app that will cater to this diktat.
+We (me and my friends) often go for outings and involv money matters. It so happened that many a times the answer to 
+'who paid how much money' was lost after a day. So I decided to make an app that can cater to this diktat.
 
 I decided python language as my language although I had a very little idea about it but I thought I will also be a 
 great learning venture. Then I found about Django Framework to develop upon.I selected mysql to be my database, as I had 
