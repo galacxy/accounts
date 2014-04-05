@@ -71,9 +71,9 @@ WSGI_APPLICATION = 'group.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wolfpack',
+        'NAME': 'bank',
         'USER': 'root',
-        'PASSWORD':'cg819816',
+        'PASSWORD':'123456',
         'HOST':'',
         'PORT':'',
     }
